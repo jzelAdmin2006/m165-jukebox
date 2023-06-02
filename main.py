@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from bson import ObjectId
 
 from db import Db
@@ -11,3 +13,6 @@ print(song.get_name())
 playlist = Playlist(ObjectId('6479ae69a07f8ea31a11e769'))
 print(playlist.get_name())
 print(playlist.get_songs())
+
+new_song = Song(None, 'New Song', 'New Interpreter', 'New Album', 'New Genre', datetime.now())
+print(new_song.get_name())
