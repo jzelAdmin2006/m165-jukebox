@@ -1,7 +1,3 @@
-import os
-
-from pymongo import MongoClient
-
 from db import Db
 
 
