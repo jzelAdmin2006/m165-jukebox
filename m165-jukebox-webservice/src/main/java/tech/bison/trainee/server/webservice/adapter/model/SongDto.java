@@ -24,12 +24,10 @@ public class SongDto {
   }
 
   @JsonCreator
-  public static SongDto of(@JsonProperty(value = "id", required = false) UUID id,
-                           @JsonProperty(value = "name", required = true) String name,
-                           @JsonProperty(value = "interpreter", required = true) String interpreter,
-                           @JsonProperty(value = "album", required = false) String album,
-                           @JsonProperty(value = "genre", required = false) String genre,
-                           @JsonProperty(value = "release", required = false) ZonedDateTime release) {
+  public static SongDto of(@JsonProperty(required = false) UUID id, @JsonProperty(required = true) String name,
+                           @JsonProperty(required = true) String interpreter,
+                           @JsonProperty(required = false) String album, @JsonProperty(required = false) String genre,
+                           @JsonProperty(required = false) ZonedDateTime release) {
     return new SongDto(id, name, interpreter, album, genre, release);
   }
 
