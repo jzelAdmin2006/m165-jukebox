@@ -25,4 +25,8 @@ public class SongService {
   public Song findById(UUID id) {
     return songRepository.findById(id);
   }
+
+  public Song save(Song song) {
+    return songRepository.save(song);
+  }
 }

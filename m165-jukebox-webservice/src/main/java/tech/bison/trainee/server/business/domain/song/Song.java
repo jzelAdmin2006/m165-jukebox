@@ -1,6 +1,7 @@
 package tech.bison.trainee.server.business.domain.song;
 
 import java.time.ZonedDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Song {
@@ -11,13 +12,18 @@ public class Song {
   private final String genre;
   private final ZonedDateTime release;
 
-  public Song(UUID id, String name, String interpreter, String album, String genre, ZonedDateTime release) {
+  private Song(UUID id, String name, String interpreter, String album, String genre, ZonedDateTime release) {
     this.id = id;
     this.name = name;
     this.interpreter = interpreter;
     this.album = album;
     this.genre = genre;
     this.release = release;
+  }
+
+  public static Song of(Optional<UUID> id, String name, String interpreter, String album, String genre,
+                        ZonedDateTime release) {
+    return new Song(id.orElse(UUID.randomUUID()), name, interpreter, album, genre, release);
   }
 
   public UUID getId() {

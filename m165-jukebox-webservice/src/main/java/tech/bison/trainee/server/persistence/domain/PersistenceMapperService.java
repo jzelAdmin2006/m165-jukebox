@@ -4,6 +4,7 @@ import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +22,11 @@ public class PersistenceMapperService {
   }
 
   public Song fromEntity(SongEntity song) {
-    return new Song(song.getId(), song.getName(), song.getInterpreter(), song.getAlbum(), song.getGenre(),
+    return Song.of(Optional.of(song.getId()),
+        song.getName(),
+        song.getInterpreter(),
+        song.getAlbum(),
+        song.getGenre(),
         song.getRelease().toInstant().atZone(ZoneId.systemDefault()));
   }
 

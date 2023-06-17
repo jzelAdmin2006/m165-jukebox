@@ -2,6 +2,7 @@ package tech.bison.trainee.server.webservice.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -14,13 +15,13 @@ import tech.bison.trainee.server.webservice.adapter.model.SongDto;
 @Service
 public class WebMapperService {
   public SongDto toDto(Song song) {
-    return new SongDto(song.getId(), song.getName(), song.getInterpreter(), song.getAlbum(), song.getGenre(),
-        song.getRelease());
+    return SongDto
+        .of(song.getId(), song.getName(), song.getInterpreter(), song.getAlbum(), song.getGenre(), song.getRelease());
   }
 
   public Song fromDto(SongDto song) {
-    return new Song(song.getId(), song.getName(), song.getInterpreter(), song.getAlbum(), song.getGenre(),
-        song.getRelease());
+    return Song.of(Optional.ofNullable(
+        song.getId()), song.getName(), song.getInterpreter(), song.getAlbum(), song.getGenre(), song.getRelease());
   }
 
   public List<SongDto> toSongDtos(List<Song> songs) {
