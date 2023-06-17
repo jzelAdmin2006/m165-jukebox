@@ -59,4 +59,13 @@ public class WebMapperService {
     }
     return playlists.stream().map(this::fromDto).collect(Collectors.toList());
   }
+
+  public Song merge(Song songToUpdate, SongDto dto) {
+    songToUpdate.setName(dto.getName());
+    songToUpdate.setInterpreter(dto.getInterpreter());
+    songToUpdate.setAlbum(dto.getAlbum());
+    songToUpdate.setGenre(dto.getGenre());
+    songToUpdate.setRelease(dto.getRelease());
+    return songToUpdate;
+  }
 }

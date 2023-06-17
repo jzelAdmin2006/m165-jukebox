@@ -6,11 +6,11 @@ import java.util.UUID;
 
 public class Song {
   private final UUID id;
-  private final String name;
-  private final String interpreter;
-  private final String album;
-  private final String genre;
-  private final ZonedDateTime release;
+  private String name;
+  private String interpreter;
+  private String album;
+  private String genre;
+  private ZonedDateTime release;
 
   private Song(UUID id, String name, String interpreter, String album, String genre, ZonedDateTime release) {
     this.id = id;
@@ -48,5 +48,25 @@ public class Song {
 
   public ZonedDateTime getRelease() {
     return release;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setInterpreter(String interpreter) {
+    this.interpreter = interpreter;
+  }
+
+  public void setAlbum(String album) {
+    this.album = album;
+  }
+
+  public void setGenre(String genre) {
+    this.genre = genre;
+  }
+
+  public void setRelease(ZonedDateTime release) {
+    this.release = release;
   }
 }
