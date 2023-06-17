@@ -29,4 +29,8 @@ public class SongService {
   public Song save(Song song) {
     return songRepository.save(song);
   }
+
+  public Song delete(Song song) {
+    return songRepository.delete(song);
+  }
 }

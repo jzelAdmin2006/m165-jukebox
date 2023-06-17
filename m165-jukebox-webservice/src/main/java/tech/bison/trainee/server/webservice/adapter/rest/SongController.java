@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,16 @@ public class SongController {
       Song mergedSong = mapper.merge(existingSong.get(), dto);
       Song updatedSong = songService.save(mergedSong);
       return ResponseEntity.ok(mapper.toDto(updatedSong));
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
+  @DeleteMapping(path = "/{id}")
+  public ResponseEntity<SongDto> deleteSong(@PathVariable UUID id) {
+    Optional<Song> existingSong = Optional.ofNullable(songService.findById(id));
+    if (existingSong.isPresent()) {
+      return ResponseEntity.ok(mapper.toDto(songService.delete(existingSong.get())));
     } else {
       return ResponseEntity.notFound().build();
     }

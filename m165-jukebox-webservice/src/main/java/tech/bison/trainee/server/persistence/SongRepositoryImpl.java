@@ -37,4 +37,10 @@ public class SongRepositoryImpl implements SongRepository {
   public Song save(Song song) {
     return mapperService.fromEntity(songPersistence.save(mapperService.toEntity(song)));
   }
+
+  @Override
+  public Song delete(Song song) {
+    songPersistence.delete(mapperService.toEntity(song));
+    return song;
+  }
 }
