@@ -1,6 +1,7 @@
 package tech.bison.trainee.server.persistence;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class SongRepositoryImpl implements SongRepository {
   }
 
   @Override
-  public Song findById(int id) {
+  public Song findById(UUID id) {
     return mapperService.fromEntity(songPersistence.findById(id).orElse(null));
   }
 
