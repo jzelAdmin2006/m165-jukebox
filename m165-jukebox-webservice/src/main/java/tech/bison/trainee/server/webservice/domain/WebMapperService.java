@@ -1,5 +1,7 @@
 package tech.bison.trainee.server.webservice.domain;
 
+import static tech.bison.trainee.server.common.UpdateUtils.updateIfNotNull;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -63,11 +65,11 @@ public class WebMapperService {
   }
 
   public Song merge(Song songToUpdate, SongDto dto) {
-    UpdateUtils.updateIfNotNull(dto::getName, songToUpdate::setName);
-    UpdateUtils.updateIfNotNull(dto::getInterpreter, songToUpdate::setInterpreter);
-    UpdateUtils.updateIfNotNull(dto::getAlbum, songToUpdate::setAlbum);
-    UpdateUtils.updateIfNotNull(dto::getGenre, songToUpdate::setGenre);
-    UpdateUtils.updateIfNotNull(dto::getRelease, songToUpdate::setRelease);
+    updateIfNotNull(dto::getName, songToUpdate::setName);
+    updateIfNotNull(dto::getInterpreter, songToUpdate::setInterpreter);
+    updateIfNotNull(dto::getAlbum, songToUpdate::setAlbum);
+    updateIfNotNull(dto::getGenre, songToUpdate::setGenre);
+    updateIfNotNull(dto::getRelease, songToUpdate::setRelease);
     return songToUpdate;
   }
 }
