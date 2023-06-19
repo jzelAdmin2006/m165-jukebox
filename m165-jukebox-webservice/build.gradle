@@ -20,6 +20,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+bootRun {
+    sourceResources sourceSets.main
 }
 
 tasks.named('test') {
