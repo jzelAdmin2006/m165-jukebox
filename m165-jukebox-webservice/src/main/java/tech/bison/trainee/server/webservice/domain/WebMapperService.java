@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import tech.bison.trainee.server.business.domain.playlist.Playlist;
 import tech.bison.trainee.server.business.domain.song.Song;
+import tech.bison.trainee.server.common.UpdateUtils;
 import tech.bison.trainee.server.webservice.adapter.model.PlaylistDto;
 import tech.bison.trainee.server.webservice.adapter.model.SongDto;
 
 @Service
 public class WebMapperService {
+
   public SongDto toDto(Song song) {
     return SongDto
         .of(song.getId(), song.getName(), song.getInterpreter(), song.getAlbum(), song.getGenre(), song.getRelease());
@@ -61,11 +63,11 @@ public class WebMapperService {
   }
 
   public Song merge(Song songToUpdate, SongDto dto) {
-    songToUpdate.setName(dto.getName());
-    songToUpdate.setInterpreter(dto.getInterpreter());
-    songToUpdate.setAlbum(dto.getAlbum());
-    songToUpdate.setGenre(dto.getGenre());
-    songToUpdate.setRelease(dto.getRelease());
+    UpdateUtils.updateIfNotNull(dto::getName, songToUpdate::setName);
+    UpdateUtils.updateIfNotNull(dto::getInterpreter, songToUpdate::setInterpreter);
+    UpdateUtils.updateIfNotNull(dto::getAlbum, songToUpdate::setAlbum);
+    UpdateUtils.updateIfNotNull(dto::getGenre, songToUpdate::setGenre);
+    UpdateUtils.updateIfNotNull(dto::getRelease, songToUpdate::setRelease);
     return songToUpdate;
   }
 }

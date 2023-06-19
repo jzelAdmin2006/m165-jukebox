@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.bison.trainee.server.business.domain.song.Song;
 import tech.bison.trainee.server.business.service.SongService;
 import tech.bison.trainee.server.webservice.adapter.model.SongDto;
+import tech.bison.trainee.server.webservice.adapter.model.UpdateSongDto;
 import tech.bison.trainee.server.webservice.domain.WebMapperService;
 
 @RestController
@@ -45,7 +46,7 @@ public class SongController {
   }
 
   @PutMapping(path = "/{id}")
-  public ResponseEntity<SongDto> updateSong(@RequestBody SongDto dto, @PathVariable UUID id) {
+  public ResponseEntity<SongDto> updateSong(@RequestBody UpdateSongDto dto, @PathVariable UUID id) {
     Optional<Song> existingSong = Optional.ofNullable(songService.findById(id));
     if (existingSong.isPresent()) {
       Song mergedSong = mapper.merge(existingSong.get(), dto);

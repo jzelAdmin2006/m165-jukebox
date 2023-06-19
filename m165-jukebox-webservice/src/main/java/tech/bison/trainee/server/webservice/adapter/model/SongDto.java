@@ -14,7 +14,7 @@ public class SongDto {
   private final String genre;
   private final ZonedDateTime release;
 
-  private SongDto(UUID id, String name, String interpreter, String album, String genre, ZonedDateTime release) {
+  SongDto(UUID id, String name, String interpreter, String album, String genre, ZonedDateTime release) {
     this.id = id;
     this.name = name;
     this.interpreter = interpreter;
