@@ -39,6 +39,16 @@ public class SongController {
     return ResponseEntity.ok(songs);
   }
 
+  @GetMapping(path = "/{id}")
+  public ResponseEntity<SongDto> getSong(@PathVariable UUID id) {
+    Optional<Song> existingSong = Optional.ofNullable(songService.findById(id));
+    if (existingSong.isPresent()) {
+      return ResponseEntity.ok(mapper.toDto(existingSong.get()));
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
   @PostMapping()
   public ResponseEntity<SongDto> addNewSong(@RequestBody SongDto dto) {
     Song song = mapper.fromDto(dto);
