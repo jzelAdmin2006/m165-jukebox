@@ -10,6 +10,8 @@ public interface SongRepository {
 
   Song findById(UUID id);
 
+  List<Song> findByCriteria(String name, String interpreter, String album, String genre);
+
   Song save(Song song);
 
   Song delete(Song song);

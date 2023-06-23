@@ -1,19 +1,19 @@
 package tech.bison.trainee.server.webservice.domain;
 
+import static org.apache.commons.lang3.StringUtils.defaultString;
 import static tech.bison.trainee.server.common.UpdateUtils.updateIfNotNull;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
-
 import tech.bison.trainee.server.business.domain.playlist.Playlist;
 import tech.bison.trainee.server.business.domain.song.Song;
-import tech.bison.trainee.server.common.UpdateUtils;
+import tech.bison.trainee.server.business.domain.song.SongSearchCriteria;
 import tech.bison.trainee.server.webservice.adapter.model.PlaylistDto;
 import tech.bison.trainee.server.webservice.adapter.model.SongDto;
+import tech.bison.trainee.server.webservice.adapter.model.SongSearchCriteriaDto;
 
 @Service
 public class WebMapperService {
@@ -71,5 +71,14 @@ public class WebMapperService {
     updateIfNotNull(dto::getGenre, songToUpdate::setGenre);
     updateIfNotNull(dto::getRelease, songToUpdate::setRelease);
     return songToUpdate;
+  }
+
+  public SongSearchCriteria fromDto(SongSearchCriteriaDto dto) {
+    return SongSearchCriteria.of(
+        defaultString(dto.getName()),
+        defaultString(dto.getInterpreter()),
+        defaultString(dto.getAlbum()),
+        defaultString(dto.getGenre())
+    );
   }
 }

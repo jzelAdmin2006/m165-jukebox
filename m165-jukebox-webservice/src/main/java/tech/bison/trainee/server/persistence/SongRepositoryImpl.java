@@ -2,10 +2,9 @@ package tech.bison.trainee.server.persistence;
 
 import java.util.List;
 import java.util.UUID;
-
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import tech.bison.trainee.server.business.domain.song.Song;
 import tech.bison.trainee.server.business.persistence.SongRepository;
 import tech.bison.trainee.server.persistence.domain.PersistenceMapperService;
@@ -31,6 +30,13 @@ public class SongRepositoryImpl implements SongRepository {
   @Override
   public Song findById(UUID id) {
     return mapperService.fromEntity(songPersistence.findById(id).orElse(null));
+  }
+
+  @Override
+  public List<Song> findByCriteria(String name, String interpreter, String album, String genre) {
+    return songPersistence.findByCriteria(name, interpreter, album, genre)
+        .map(mapperService::fromEntity)
+        .collect(Collectors.toList());
   }
 
   @Override

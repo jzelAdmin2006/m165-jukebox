@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,16 +14,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tech.bison.trainee.server.business.domain.song.Song;
 import tech.bison.trainee.server.business.service.SongService;
 import tech.bison.trainee.server.webservice.adapter.model.SongDto;
+import tech.bison.trainee.server.webservice.adapter.model.SongSearchCriteriaDto;
 import tech.bison.trainee.server.webservice.adapter.model.UpdateSongDto;
 import tech.bison.trainee.server.webservice.domain.WebMapperService;
 
 @RestController
 @RequestMapping(path = "/songs")
 public class SongController {
+
   private final WebMapperService mapper = new WebMapperService();
   private final SongService songService;
 
@@ -36,6 +36,15 @@ public class SongController {
   @GetMapping()
   public ResponseEntity<List<SongDto>> getSongs() {
     List<SongDto> songs = songService.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
+    return ResponseEntity.ok(songs);
+  }
+
+  @GetMapping("/search")
+  public ResponseEntity<List<SongDto>> searchSongs(@RequestBody SongSearchCriteriaDto criteria) {
+    List<SongDto> songs = songService.findByCriteria(mapper.fromDto(criteria))
+        .stream()
+        .map(mapper::toDto)
+        .collect(Collectors.toList());
     return ResponseEntity.ok(songs);
   }
 
